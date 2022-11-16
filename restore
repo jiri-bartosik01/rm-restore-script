@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Script for restoring rm-oved text files,
+# or their parts that still remain on the disk in binary form.
+
+# usage:
+#	sudo restore 'Very important file with passwords:' /dev/sda1 > results
+#	sudo restore 'file_i_worked_on_for_hours.c' /dev/mapper/home > results
+
+# show lines before an after match, change if file is larger
+before=50
+after=100
+# some text from removed file
+search_for=$1
+search_partition=$2
+
+grep -a -B $before -A $after "$search_for" "$search_partition"
